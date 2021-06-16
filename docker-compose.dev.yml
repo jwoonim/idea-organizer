@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile.dev
+    container_name: app
+    image: idea-organizer:dev
+    ports:
+      - 3000:3000
+    volumes:
+      - ./app/components:/usr/src/app/components
+      - ./app/pages:/usr/src/app/pages
+      - ./app/public:/usr/src/app/public
+      - ./app/styles:/usr/src/app/styles
+      - ./app/src:/usr/src/app/src
+    env_file:
+      - ./app/.env.development
+    depends_on:
+      - mongodb
+      - redis
+    restart: always
+
+  mongodb:
+    container_name: mongo
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongodb:/data/db
+    restart: always
+
+  redis:
+    image: redis:latest

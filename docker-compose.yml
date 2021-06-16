@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile.prod
+      args:
+        ENV: ${ENV}
+        MONGODB_URI: ${MONGODB_URI}
+        REDIS_HOST: ${REDIS_HOST}
+        REDIS_PORT: ${REDIS_PORT}
+        EMAIL_VERIFICATION_URL: ${EMAIL_VERIFICATION_URL}
+        RESET_PASSWORD_URL: ${RESET_PASSWORD_URL}
+        SOCIAL_SIGN_UP_PASSWORD_KEY: ${SOCIAL_SIGN_UP_PASSWORD_KEY}
+        GMAIL_ACCOUNT: ${GMAIL_ACCOUNT}
+        GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+        GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+        OAUTH_REFRESH_TOKEN: ${OAUTH_REFRESH_TOKEN}
+        GOOGLE_CLOUD_STORAGE_BUCKET: ${GOOGLE_CLOUD_STORAGE_BUCKET}
+    container_name: app
+    image: idea-organizer:${VERSION}
+    ports:
+      - 3000:3000
+    depends_on:
+      - mongodb
+      - redis
+    restart: always
+ 
+  mongodb:
+    container_name: mongo
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    restart: always
+
+  redis:
+    container_name: redis
+    image: redis:latest
+    ports:
+      - 6379:6379

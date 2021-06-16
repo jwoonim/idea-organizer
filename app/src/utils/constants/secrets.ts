@@ -1,0 +1,16 @@
+export const Secrets = {
+  NODE_ENV: process.env.NODE_ENV,
+  MONGODB_URI: process.env.MONGODB_URI,
+  REDIS_HOST: process.env.REDIS_HOST,
+  REDIS_PORT: process.env.REDIS_PORT,
+  EMAIL_VERIFICATION_URL: process.env.EMAIL_VERIFICATION_URL,
+  RESET_PASSWORD_URL: process.env.RESET_PASSWORD_URL,
+  SOCIAL_SIGN_UP_PASSWORD_KEY: process.env.SOCIAL_SIGN_UP_PASSWORD_KEY,
+  GMAIL_ACCOUNT: process.env.GMAIL_ACCOUNT,
+  GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+  GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
+  OAUTH_REFRESH_TOKEN: process.env.OAUTH_REFRESH_TOKEN,
+  GOOGLE_CLOUD_STORAGE_BUCKET: process.env.GOOGLE_CLOUD_STORAGE_BUCKET,
+} as const
+
+export type Secret = typeof Secrets[keyof typeof Secrets]
