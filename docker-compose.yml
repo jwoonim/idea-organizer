@@ -19,7 +19,7 @@ services:
         OAUTH_REFRESH_TOKEN: ${OAUTH_REFRESH_TOKEN}
         GOOGLE_CLOUD_STORAGE_BUCKET: ${GOOGLE_CLOUD_STORAGE_BUCKET}
     container_name: app
-    image: idea-organizer:${VERSION}
+    image: jwoonim/idea-organizer:${VERSION}
     ports:
       - 3000:3000
     depends_on:
