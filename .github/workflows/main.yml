@@ -28,7 +28,23 @@ jobs:
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           OAUTH_REFRESH_TOKEN: ${{ secrets.OAUTH_REFRESH_TOKEN }}
           GOOGLE_CLOUD_STORAGE_BUCKET: ${{ secrets.GOOGLE_CLOUD_STORAGE_BUCKET }}
-          VERSION: ${{ secrets.VERSION }}
         run: |
           docker-compose build
           docker-compose push
+
+      - name: Update Dockerrun.aws.json
+        run: echo "`jq '.containerDefinitions[0].image = "jwoonim/idea-organizer:${{ secrets.VERSION }}"' Dockerrun.aws.json`" > Dockerrun.aws.json
+
+    - name: Generate deployment package
+      run: zip -r deploy.zip . -x '*.git*'
+      
+    - name: Deploy to EB
+      uses: einaregilsson/beanstalk-deploy@v16
+      with:
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        application_name: idea-organizer
+        environment_name: Ideaorganizer-env
+        version_label: ${{ secrets.VERSION }}
+        region: us-west-2
+        deployment_package: deploy.zip

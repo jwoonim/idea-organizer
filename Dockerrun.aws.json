@@ -1,0 +1,45 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "authentication": {
+    "bucket": "idea-organizer-auth",
+    "key": "config.json"
+  },
+  "containerDefinitions": [
+    {
+      "name": "app",
+      "image": "jwoonim/idea-organizer:${VERSION}",
+      "essential": true,
+      "memory": 128,
+      "portMappings": [
+        {
+          "hostPort": 3000,
+          "containerPort": 3000
+        }
+      ]
+    },
+    {
+      "name": "mongo",
+      "image": "mongo:latest",
+      "essential": true,
+      "memory": 128,
+      "portMappings": [
+        {
+          "hostPort": 27017,
+          "containerPort": 27017
+        }
+      ]
+    },
+    {
+      "name": "redis",
+      "image": "redis:latest",
+      "essential": true,
+      "memory": 128,
+      "portMappings": [
+        {
+          "hostPort": 6379,
+          "containerPort": 6379
+        }
+      ]
+    }
+  ]
+}
