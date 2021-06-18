@@ -47,5 +47,5 @@ jobs:
           application_name: idea-organizer
           environment_name: Ideaorganizer-env
           version_label: ${{ secrets.VERSION }}
-          region: us-west-2
+          region: us-east-2
           deployment_package: deploy.zip
