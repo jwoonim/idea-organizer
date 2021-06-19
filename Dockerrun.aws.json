@@ -19,7 +19,7 @@
     },
     {
       "name": "mongo",
-      "image": "mongo:latest",
+      "image": "mongo",
       "essential": true,
       "memory": 128,
       "portMappings": [
@@ -31,7 +31,7 @@
     },
     {
       "name": "redis",
-      "image": "redis:latest",
+      "image": "redis",
       "essential": true,
       "memory": 128,
       "portMappings": [
