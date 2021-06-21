@@ -8,11 +8,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Login to Docker Hub
-        uses: docker/login-action@v1
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
 
       - name: Build image
         env:
@@ -28,24 +33,26 @@ jobs:
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           OAUTH_REFRESH_TOKEN: ${{ secrets.OAUTH_REFRESH_TOKEN }}
           GOOGLE_CLOUD_STORAGE_BUCKET: ${{ secrets.GOOGLE_CLOUD_STORAGE_BUCKET }}
+          ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
+          ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
           VERSION: ${{ secrets.VERSION }}
         run: |
           docker-compose build
-          docker-compose push
+          docker-compose push 
 
-      - name: Update Dockerrun.aws.json
-        run: echo "`jq '.containerDefinitions[0].image = "jwoonim/idea-organizer:${{ secrets.VERSION }}"' Dockerrun.aws.json`" > Dockerrun.aws.json
+      # - name: Update Dockerrun.aws.json
+      #   run: echo "`jq '.containerDefinitions[0].image = "jwoonim/idea-organizer:${{ secrets.VERSION }}"' Dockerrun.aws.json`" > Dockerrun.aws.json
 
-      - name: Generate deployment package
-        run: zip -r deploy.zip . -x '*.git*'
+      # - name: Generate deployment package
+      #   run: zip -r deploy.zip . -x '*.git*'
         
-      - name: Deploy to EB
-        uses: einaregilsson/beanstalk-deploy@v16
-        with:
-          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: idea-organizer
-          environment_name: Ideaorganizer-env-1
-          version_label: ${{ secrets.VERSION }}
-          region: us-east-2
-          deployment_package: deploy.zip
+      # - name: Deploy to EB
+      #   uses: einaregilsson/beanstalk-deploy@v16
+      #   with:
+      #     aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     application_name: idea-organizer
+      #     environment_name: Ideaorganizer-env-1
+      #     version_label: ${{ secrets.VERSION }}
+      #     region: us-east-2
+      #     deployment_package: deploy.zip
