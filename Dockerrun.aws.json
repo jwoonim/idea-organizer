@@ -17,7 +17,7 @@
       "name": "mongo",
       "image": "mongo",
       "essential": true,
-      "memory": 512,
+      "memory": 256,
       "portMappings": [
         {
           "hostPort": 27017,
@@ -29,7 +29,7 @@
       "name": "redis",
       "image": "redis",
       "essential": true,
-      "memory": 128,
+      "memory": 256,
       "portMappings": [
         {
           "hostPort": 6379,
