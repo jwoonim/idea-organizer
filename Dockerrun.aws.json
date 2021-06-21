@@ -29,7 +29,7 @@
       "name": "redis",
       "image": "redis",
       "essential": true,
-      "memory": 256,
+      "memory": 128,
       "portMappings": [
         {
           "hostPort": 6379,
