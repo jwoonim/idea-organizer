@@ -7,7 +7,7 @@
   "containerDefinitions": [
     {
       "name": "app",
-      "image": "jwoonim/idea-organizer:${VERSION}",
+      "image": "jwoonim/idea-organizer:1.0.0-alpha.12",
       "essential": true,
       "memory": 128,
       "portMappings": [
