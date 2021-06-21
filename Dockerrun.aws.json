@@ -5,7 +5,7 @@
       "name": "app",
       "image": "",
       "essential": true,
-      "memory": 512,
+      "memory": 256,
       "portMappings": [
         {
           "hostPort": 3000,
@@ -17,7 +17,7 @@
       "name": "mongo",
       "image": "mongo",
       "essential": true,
-      "memory": 985,
+      "memory": 512,
       "portMappings": [
         {
           "hostPort": 27017,
@@ -29,7 +29,7 @@
       "name": "redis",
       "image": "redis",
       "essential": true,
-      "memory": 512,
+      "memory": 256,
       "portMappings": [
         {
           "hostPort": 6379,
