@@ -1,13 +1,9 @@
 {
   "AWSEBDockerrunVersion": 2,
-  "authentication": {
-    "bucket": "idea-organizer-auth",
-    "key": "config.json"
-  },
   "containerDefinitions": [
     {
       "name": "app",
-      "image": "jwoonim/idea-organizer:1.0.0-alpha.13",
+      "image": "",
       "essential": true,
       "memory": 128,
       "portMappings": [
