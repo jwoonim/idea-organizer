@@ -11,6 +11,10 @@
           "hostPort": 80,
           "containerPort": 3000
         }
+      ],
+      "links": [
+        "mongo",
+        "redis"
       ]
     },
     {
