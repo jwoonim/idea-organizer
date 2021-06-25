@@ -1,8 +1,7 @@
 export const Secrets = {
   NODE_ENV: process.env.NODE_ENV,
   MONGODB_URI: process.env.MONGODB_URI,
-  REDIS_HOST: process.env.REDIS_HOST,
-  REDIS_PORT: process.env.REDIS_PORT,
+  REDIS_URL: process.env.REDIS_URL,
   EMAIL_VERIFICATION_URL: process.env.EMAIL_VERIFICATION_URL,
   RESET_PASSWORD_URL: process.env.RESET_PASSWORD_URL,
   SOCIAL_SIGN_UP_PASSWORD_KEY: process.env.SOCIAL_SIGN_UP_PASSWORD_KEY,

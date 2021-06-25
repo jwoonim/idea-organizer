@@ -23,8 +23,7 @@ jobs:
         env:
           ENV: production
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
-          REDIS_HOST: ${{ secrets.REDIS_HOST }}
-          REDIS_PORT: ${{ secrets.REDIS_PORT }}
+          REDIS_URL: ${{ secrets.REDIS_URL }}
           EMAIL_VERIFICATION_URL: ${{ secrets.EMAIL_VERIFICATION_URL }}
           RESET_PASSWORD_URL: ${{ secrets.RESET_PASSWORD_URL }}
           SOCIAL_SIGN_UP_PASSWORD_KEY: ${{ secrets.SOCIAL_SIGN_UP_PASSWORD_KEY }}
