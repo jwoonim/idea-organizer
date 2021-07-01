@@ -57,7 +57,7 @@ jobs:
               "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
               "client_x509_cert_url": "${{ secrets.GOOGLE_CLOUD_CERT_URL }}"
             }' \
-          > idea-organizer-storage.json
+          > ./app/idea-organizer-storage.json
 
       - name: Generate deployment package
         run: zip -r deploy.zip . -x '*.git*'
