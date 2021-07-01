@@ -28,9 +28,7 @@ export const uploadImage = async (base64Image, userId, graphId) => {
         reject(false)
       })
       .on('finish', () => {
-        resolve(
-          `http://storage.cloud.google.com/${Secrets.GOOGLE_CLOUD_STORAGE_BUCKET}/${userId}/${graphId}.jpg`
-        )
+        resolve(`${userId}/${graphId}.jpg`)
       })
       .end(buffer)
   })
@@ -47,4 +45,35 @@ export const removeImages = async (userId) => {
   await storage
     .bucket(Secrets.GOOGLE_CLOUD_STORAGE_BUCKET)
     .deleteFiles({ prefix: userId })
+}
+
+export const getSignedUrls = async (ideas) => {
+  const urls = []
+  for await (let i of ideas) {
+    if (i.picture)
+      urls.push(generateV4ReadSignedUrl(i))
+  }
+  return await Promise.all(urls)
+}
+
+const generateV4ReadSignedUrl = async (idea) => {
+  return await new Promise((resolve, reject) => {
+    storage
+      .bucket(Secrets.GOOGLE_CLOUD_STORAGE_BUCKET)
+      .file(idea.picture)
+      .getSignedUrl({
+        version: 'v4',
+        action: 'read',
+        expires: Date.now() + 1 * 60 * 1000, // 1 minute
+      })
+      .then((res) => {
+        const [url] = res
+        idea.picture = url
+        resolve(idea)
+      })
+      .catch((e) => {
+        console.log(e)
+        reject(false)
+      })
+  })
 }

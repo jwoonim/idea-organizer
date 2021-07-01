@@ -25,7 +25,11 @@ import {
   deleteGraphById,
   getIdeaCount,
 } from 'src/database/services'
-import { removeImage, uploadImage } from 'src/utils/google-cloud-storage'
+import {
+  getSignedUrls,
+  removeImage,
+  uploadImage,
+} from 'src/utils/google-cloud-storage'
 
 /**
  * @name SaveElementsInput
@@ -354,7 +358,11 @@ export const GetIdeas = extendType({
         const { _id } = await checkSessionId(ctx.req)
         if (!_id) return ErrorResults.INVALID_SESSION_ERROR
 
-        const ideas = await findGraphsByUserId(_id)
+        const graphs = await findGraphsByUserId(_id)
+        let ideas = []
+        await getSignedUrls(graphs).then((res) => {
+          ideas = res
+        })
         return { GetIdeasSuccess: { ideas } }
       },
     })
