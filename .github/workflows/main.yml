@@ -19,6 +19,23 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
+      - name: Create Google Cloud Storage JSON file
+        run: |
+          jq -n \
+            '{
+              "type": "service_account",
+              "project_id": "idea-organizer-303412",
+              "private_key_id": "${{ secrets.GOOGLE_CLOUD_PRIVATE_KEY_ID }}",
+              "private_key": "${{ secrets.GOOGLE_CLOUD_PRIVATE_KEY }}",
+              "client_email": "${{ secrets.GOOGLE_CLOUD_CLIENT_EMAIL }}",
+              "client_id": "${{ secrets.GOOGLE_CLOUD_CLIENT_ID }}",
+              "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+              "token_uri": "https://oauth2.googleapis.com/token",
+              "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+              "client_x509_cert_url": "${{ secrets.GOOGLE_CLOUD_CERT_URL }}"
+            }' \
+          > ./app/idea-organizer-storage.json
+          
       - name: Build image
         env:
           ENV: production
@@ -37,31 +54,14 @@ jobs:
           VERSION: ${{ secrets.VERSION }}
         run: |
           docker-compose build
-          docker-compose push 
+          docker-compose push
 
       - name: Update Dockerrun.aws.json
         run: echo "`jq '.containerDefinitions[0].image = "${{ secrets.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}:${{ secrets.VERSION }}"' Dockerrun.aws.json`" > Dockerrun.aws.json
 
-      - name: Create Google Cloud Storage JSON file
-        run: |
-          jq -n \
-            '{
-              "type": "service_account",
-              "project_id": "idea-organizer-303412",
-              "private_key_id": "${{ secrets.GOOGLE_CLOUD_PRIVATE_KEY_ID }}",
-              "private_key": "${{ secrets.GOOGLE_CLOUD_PRIVATE_KEY }}",
-              "client_email": "${{ secrets.GOOGLE_CLOUD_CLIENT_EMAIL }}",
-              "client_id": "${{ secrets.GOOGLE_CLOUD_CLIENT_ID }}",
-              "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-              "token_uri": "https://oauth2.googleapis.com/token",
-              "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-              "client_x509_cert_url": "${{ secrets.GOOGLE_CLOUD_CERT_URL }}"
-            }' \
-          > ./app/idea-organizer-storage.json
-
       - name: Generate deployment package
         run: zip -r deploy.zip . -x '*.git*'
-        
+
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v16
         with:
