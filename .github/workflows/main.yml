@@ -35,7 +35,7 @@ jobs:
               "client_x509_cert_url": "${{ secrets.GOOGLE_CLOUD_CERT_URL }}"
             }' \
           > ./app/idea-organizer-storage.json
-          
+
       - name: Build image
         env:
           ENV: production
@@ -45,9 +45,7 @@ jobs:
           RESET_PASSWORD_URL: ${{ secrets.RESET_PASSWORD_URL }}
           SOCIAL_SIGN_UP_PASSWORD_KEY: ${{ secrets.SOCIAL_SIGN_UP_PASSWORD_KEY }}
           GMAIL_ACCOUNT: ${{ secrets.GMAIL_ACCOUNT }}
-          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-          OAUTH_REFRESH_TOKEN: ${{ secrets.OAUTH_REFRESH_TOKEN }}
+          GMAIL_ACCOUNT_APP_PASS: ${{ secrets.GMAIL_ACCOUNT_APP_PASS }}
           GOOGLE_CLOUD_STORAGE_BUCKET: ${{ secrets.GOOGLE_CLOUD_STORAGE_BUCKET }}
           ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
           ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
