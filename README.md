@@ -11,8 +11,8 @@ I was building a mind map on the paper then I wanted to build a project to build
 ### Before you run on a local environment, you need development environments below
 | Environments | Versions |
 | :------------| :------: |
-| [Docker](https://www.docker.com) | v20.10.7 above |
-| [Node.js](https://nodejs.org) | v14.15.3 above |
+| [Docker](https://www.docker.com) | v20.10.7 or later |
+| [Node.js](https://nodejs.org) | v14.15.3 or later |
 
 
 ### Run
