@@ -51,7 +51,7 @@ export default function Header({ ...props }) {
             >
               Sign up
             </Button>
-            <Link href="https://ideaorganizer.fun" isExternal ml="2rem">
+            <Link href="https://github.com/jwoonim/idea-organizer" isExternal ml="2rem">
               <FaGithub size={43} />
             </Link>
           </Menu>
@@ -119,7 +119,7 @@ export default function Header({ ...props }) {
                   }}
                 />
               </a>
-              <Link href="https://ideaorganizer.fun" isExternal ml="1rem" mr="1rem">
+              <Link href="https://github.com/jwoonim/idea-organizer" isExternal ml="1rem" mr="1rem">
                 <FaGithub size={43} />
               </Link>
               <Profile user={user} />
