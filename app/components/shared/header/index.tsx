@@ -1,6 +1,7 @@
 import { useRouter } from 'next/dist/client/router'
 import { useEffect, useState } from 'react'
-import { Box, Button, Flex, Spacer } from '@chakra-ui/react'
+import { Box, Button, Flex, Link } from '@chakra-ui/react'
+import { FaGithub } from 'react-icons/fa'
 
 import Nav from './Nav'
 import Logo from './Logo'
@@ -50,6 +51,9 @@ export default function Header({ ...props }) {
             >
               Sign up
             </Button>
+            <Link href="https://ideaorganizer.fun" isExternal ml="2rem">
+              <FaGithub size={43} />
+            </Link>
           </Menu>
         </Nav>
       </>
@@ -85,25 +89,8 @@ export default function Header({ ...props }) {
               direction={['column', 'row', 'row', 'row']}
               pt={[4, 4, 0, 0]}
             >
-              <a
-                href="https://www.buymeacoffee.com/happyforacoffee"
-                target="_blank"
-                style={{
-                  width: '120px',
-                  marginRight: '10px',
-                }}
-              >
-                <img
-                  src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
-                  alt="Buy Me A Coffee"
-                  style={{
-                    height: '36px !important',
-                    width: '217px !important',
-                  }}
-                />
-              </a>
               <Button
-                mr="20px"
+                mr="2rem"
                 colorScheme="blue"
                 variant="outline"
                 onClick={async () => {
@@ -116,6 +103,25 @@ export default function Header({ ...props }) {
               >
                 Generate an idea
               </Button>
+              <a
+                href="https://www.buymeacoffee.com/happyforacoffee"
+                target="_blank"
+                style={{
+                  width: '120px'
+                }}
+              >
+                <img
+                  src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+                  alt="Buy Me A Coffee"
+                  style={{
+                    height: '36px !important',
+                    width: '217px !important',
+                  }}
+                />
+              </a>
+              <Link href="https://ideaorganizer.fun" isExternal ml="1rem" mr="1rem">
+                <FaGithub size={43} />
+              </Link>
               <Profile user={user} />
             </Flex>
           </Box>
