@@ -6,6 +6,9 @@
 ## Motivation
 I was building a mind map on the paper then I wanted to build a project to build a mind map for myself. Hope this project provides a better idea of full stack development using [Next.js](https://nextjs.org).
 
+## Database Design
+![Alt text](/database-design.png?raw=true "Database Design")
+
 ## Development
 
 ### Before you run on a local environment, you need development environments below
