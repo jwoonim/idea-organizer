@@ -9,6 +9,29 @@ I was building a mind map on the paper then I wanted to build a project to build
 ## Database Design
 ![Alt text](/database-design.png?raw=true "Database Design")
 
+## Screenshots
+![Alt text](/index.png?raw=true "Index")
+*Index page*
+
+![Alt text](/sign-up-page.png?raw=true "Sign up")
+*Sign up page*
+
+![Alt text](/sign-in-page.png?raw=true "Sign in")
+*Sign in page*
+
+![Alt text](/find-password-page.png?raw=true "Find password")
+*Find password page*
+
+![Alt text](/idea-page2.png?raw=true "Ideas")
+*List of ideas page*
+
+![Alt text](/ideas-edit-page.png?raw=true "Ideas edit")
+*Create and update ideas page*
+
+![Alt text](/account-settings-page.png?raw=true "Account settings")
+*Account settings page*
+
+
 ## Development
 
 ### Before you run on a local environment, you need development environments below
